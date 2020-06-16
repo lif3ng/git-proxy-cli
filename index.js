@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const WebSocket = require('ws');
 const fs = require('fs');
 const tar = require('tar')
@@ -33,12 +35,16 @@ if (!targetPath) {
 
 const { staticServerBaseURL, wsURL } = getServer()
 console.log(`Connecting ${wsURL}`)
-const ws = new WebSocket(wsURL)
+const ws = new WebSocket(wsURL, {
+    headers: {
+        origin: staticServerBaseURL
+    }
+})
+
 const send = (data) => {
     ws.send(JSON.stringify(data))
 }
 ws.on('open', () => {
-    send({ type: '2' })
     send({ url: urlToDownload })
     console.log(`Download url: ${urlToDownload}`)
 })
@@ -59,6 +65,9 @@ ws.on('message', (m) => {
         }
     } catch (e) {
     }
+})
+ws.on('close', (e) => {
+    console.log('close', e)
 })
 
 const dl = async (url) => {

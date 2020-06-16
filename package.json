@@ -1,10 +1,12 @@
 {
   "name": "git-proxy-cli",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Proxy tools like `wget`, `git clone`",
-  "bin": "index.js",
+  "bin": {
+    "gitget": "index.js"
+  },
   "main": "index.js",
-  "repository": "https://github.com/lif3ng/todos-vue-graphql",
+  "repository": "https://github.com/lif3ng/git-proxy-cli",
   "author": "lif3ng",
   "license": "MIT",
   "private": false,
