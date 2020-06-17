@@ -40,7 +40,8 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: '@lif3ng'  
+          scope: '@lif3ng'
+      - run: sed -i s#\"git-proxy-cli\"#\"@lif3ng/git-proy-cli\"#g package.json
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
